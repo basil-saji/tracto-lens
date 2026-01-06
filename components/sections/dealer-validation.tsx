@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { AlertCircle, CheckCircle } from "lucide-react"
+import { AlertCircle, CheckCircle, Circle } from "lucide-react"
 
 interface DealerValidationProps {
   data: any
@@ -34,45 +34,49 @@ export function DealerValidation({ data }: DealerValidationProps) {
 
   return (
     <>
-      <div className="rounded-lg border border-gray-100 bg-white p-4 shadow-sm">
-        <h3 className="mb-4 font-semibold text-slate-900">Dealer Validation</h3>
-        <div className="grid grid-cols-2 gap-4">
+      <div className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm hover:shadow-md transition-shadow">
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="font-semibold text-slate-900 tracking-tight">Dealer Identity</h3>
+          <Circle className="h-2 w-2 text-emerald-600 animate-pulse-glow fill-emerald-600" />
+        </div>
+
+        <div className="grid grid-cols-2 gap-4 mb-4">
           <div>
-            <p className="text-xs font-medium text-slate-500 uppercase">Dealer Name</p>
-            <p className="mt-1 text-sm text-slate-900">{data.dealer_name}</p>
+            <p className="text-xs font-medium text-slate-500 uppercase tracking-wider mb-1">Dealer Name</p>
+            <p className="text-sm font-semibold text-slate-900">{data.dealer_name}</p>
           </div>
           <div>
-            <p className="text-xs font-medium text-slate-500 uppercase">GSTIN</p>
-            <div className="mt-1 flex items-center gap-2">
-              <p className="text-sm text-slate-900">{data.gstin}</p>
+            <p className="text-xs font-medium text-slate-500 uppercase tracking-wider mb-1">GSTIN</p>
+            <div className="flex items-center gap-2">
+              <p className="text-sm font-mono text-slate-900">{data.gstin}</p>
               {!data.is_dealer_blacklisted && (
-                <Badge variant="outline" className="bg-emerald-50 text-emerald-700 border-emerald-200">
+                <Badge variant="outline" className="bg-emerald-50 text-emerald-700 border-emerald-200 text-xs">
                   Verified
                 </Badge>
               )}
             </div>
           </div>
           <div>
-            <p className="text-xs font-medium text-slate-500 uppercase">Invoice No</p>
-            <p className="mt-1 text-sm text-slate-900">{data.invoice_no}</p>
+            <p className="text-xs font-medium text-slate-500 uppercase tracking-wider mb-1">Invoice No</p>
+            <p className="text-sm font-mono text-slate-900">{data.invoice_no}</p>
           </div>
           <div>
-            <p className="text-xs font-medium text-slate-500 uppercase">Date</p>
-            <p className="mt-1 text-sm text-slate-900">{data.date}</p>
+            <p className="text-xs font-medium text-slate-500 uppercase tracking-wider mb-1">Date</p>
+            <p className="text-sm font-mono text-slate-900">{data.date}</p>
           </div>
         </div>
 
-        <div className="mt-4 pt-4 border-t border-gray-100 flex items-center justify-between">
+        <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <StatusIcon className="h-4 w-4" />
-            <Badge className={`${status.color} border`}>{status.label}</Badge>
+            <Badge className={`${status.color} border text-xs`}>{status.label}</Badge>
           </div>
           {status.reason && (
             <Button
               variant="ghost"
               size="sm"
               onClick={() => setShowSourceModal(true)}
-              className="text-xs text-slate-600 hover:text-slate-900"
+              className="text-xs text-slate-600 hover:text-slate-900 h-auto py-1"
             >
               View Source
             </Button>
@@ -82,7 +86,7 @@ export function DealerValidation({ data }: DealerValidationProps) {
 
       {showSourceModal && status.reason && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-          <div className="bg-white rounded-lg shadow-lg p-6 max-w-sm w-full mx-4">
+          <div className="bg-white rounded-xl shadow-xl p-6 max-w-sm w-full mx-4 border border-slate-200">
             <div className="flex items-start gap-3 mb-4">
               <AlertCircle className="h-5 w-5 text-red-600 mt-0.5 flex-shrink-0" />
               <div>

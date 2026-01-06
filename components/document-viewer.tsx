@@ -12,10 +12,9 @@ export function DocumentViewer({ highlightedField }: DocumentViewerProps) {
   const [zoom, setZoom] = useState(100)
 
   return (
-    <div className="flex w-1/2 flex-col items-center justify-center bg-slate-100 p-8">
-      {/* Document Placeholder with highlight on hover */}
+    <div className="flex w-1/2 flex-col items-center justify-center bg-slate-50 p-8">
       <div
-        className="flex items-center justify-center rounded-lg bg-white shadow-lg relative"
+        className="flex items-center justify-center rounded-xl bg-white shadow-lg border border-slate-200 relative"
         style={{
           width: `${Math.min(400, 400 * (zoom / 100))}px`,
           height: `${Math.min(550, 550 * (zoom / 100))}px`,
@@ -30,16 +29,16 @@ export function DocumentViewer({ highlightedField }: DocumentViewerProps) {
         </div>
 
         {highlightedField && (
-          <div className="absolute inset-4 border-2 border-yellow-400 rounded bg-yellow-50/20 pointer-events-none animate-pulse" />
+          <div className="absolute inset-4 border-2 border-emerald-400 rounded bg-emerald-50/30 pointer-events-none animate-pulse" />
         )}
       </div>
 
-      <div className="mt-8 flex gap-3 rounded-full bg-white/80 backdrop-blur-md px-4 py-3 shadow-lg border border-white/20">
+      <div className="mt-8 flex gap-2 rounded-full glass px-2 py-2 shadow-lg border border-white/40">
         <Button
           variant="ghost"
           size="sm"
           onClick={() => setZoom(Math.min(zoom + 20, 200))}
-          className="hover:bg-slate-100"
+          className="hover:bg-slate-100 rounded-full"
         >
           <ZoomIn className="h-4 w-4" />
         </Button>
@@ -47,11 +46,11 @@ export function DocumentViewer({ highlightedField }: DocumentViewerProps) {
           variant="ghost"
           size="sm"
           onClick={() => setZoom(Math.max(zoom - 20, 50))}
-          className="hover:bg-slate-100"
+          className="hover:bg-slate-100 rounded-full"
         >
           <ZoomOut className="h-4 w-4" />
         </Button>
-        <Button variant="ghost" size="sm" onClick={() => setZoom(100)} className="hover:bg-slate-100">
+        <Button variant="ghost" size="sm" onClick={() => setZoom(100)} className="hover:bg-slate-100 rounded-full">
           <RotateCw className="h-4 w-4" />
         </Button>
       </div>

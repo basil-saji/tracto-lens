@@ -1,3 +1,6 @@
+"use client"
+
+import { useState } from "react"
 import { Scan, Shield, TrendingUp } from "lucide-react"
 import { UploadZone } from "@/components/upload-zone"
 
@@ -6,54 +9,80 @@ interface LandingViewProps {
 }
 
 export function LandingView({ onAnalyze }: LandingViewProps) {
+  const [activeCard, setActiveCard] = useState<string | null>(null)
+
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-background">
       {/* Hero Section */}
-      <section className="flex flex-col items-center justify-center px-6 py-20 text-center">
-        <h1 className="mb-6 max-w-3xl text-5xl font-bold tracking-tight text-emerald-900">
-          Automate Tractor Loan Underwriting.
+      <section className="flex flex-col items-center justify-center px-6 py-24 text-center">
+        <h1 className="mb-6 max-w-4xl text-6xl font-bold tracking-tight text-foreground leading-tight">
+          Tractor Lending, Accelerated.
         </h1>
-        <p className="mb-12 max-w-2xl text-lg text-slate-500">
-          Eliminate manual data entry. Extract dealer quotations, validate GSTIN, and assess risk in real-time.
+        <p className="mb-16 max-w-2xl text-lg text-muted-foreground">
+          Extract dealer quotations, validate vendor integrity, and assess risk in seconds. Enterprise-grade AI for
+          tractor loan underwriting.
         </p>
 
         {/* Upload Component */}
-        <div className="mb-16 w-full max-w-2xl">
+        <div className="mb-24 w-full max-w-2xl">
           <UploadZone onAnalyze={onAnalyze} />
         </div>
 
-        <div className="grid w-full max-w-4xl grid-cols-1 gap-6 md:grid-cols-3">
-          {/* Handwriting Recognition */}
-          <div className="rounded-lg border border-gray-200 bg-gradient-to-br from-slate-50 to-white p-6 hover:shadow-sm transition-shadow">
-            <div className="flex items-center gap-3 mb-3">
-              <Scan className="h-5 w-5 text-emerald-900 flex-shrink-0" />
-              <h3 className="font-semibold text-slate-900 text-sm">Handwriting Recognition</h3>
+        <div className="w-full max-w-5xl">
+          <p className="mb-8 text-sm font-medium text-muted-foreground uppercase tracking-wide">
+            Powered by Advanced AI
+          </p>
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+            {/* Handwriting Recognition */}
+            <div
+              onMouseEnter={() => setActiveCard("handwriting")}
+              onMouseLeave={() => setActiveCard(null)}
+              className="group glass rounded-xl p-8 transition-all duration-300 hover:shadow-lg hover:shadow-emerald-500/10 cursor-pointer"
+            >
+              <div className="flex items-center gap-4 mb-4">
+                <div className="p-3 rounded-lg bg-emerald-100 group-hover:bg-emerald-200 transition-colors">
+                  <Scan className="h-6 w-6 text-emerald-900" />
+                </div>
+              </div>
+              <h3 className="mb-2 text-lg font-semibold text-foreground tracking-tight">Intelligent Script Analysis</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                Normalizes chaotic handwritten dealer quotes into structured digital records with 99% accuracy.
+              </p>
             </div>
-            <p className="text-xs text-slate-600 leading-relaxed">
-              Intelligent Script Analysis. Converts messy dealer handwriting into structured data.
-            </p>
-          </div>
 
-          {/* Fraud Check */}
-          <div className="rounded-lg border border-gray-200 bg-gradient-to-br from-slate-50 to-white p-6 hover:shadow-sm transition-shadow">
-            <div className="flex items-center gap-3 mb-3">
-              <Shield className="h-5 w-5 text-emerald-900 flex-shrink-0" />
-              <h3 className="font-semibold text-slate-900 text-sm">Fraud Check</h3>
+            {/* Fraud Check */}
+            <div
+              onMouseEnter={() => setActiveCard("fraud")}
+              onMouseLeave={() => setActiveCard(null)}
+              className="group glass rounded-xl p-8 transition-all duration-300 hover:shadow-lg hover:shadow-emerald-500/10 cursor-pointer"
+            >
+              <div className="flex items-center gap-4 mb-4">
+                <div className="p-3 rounded-lg bg-emerald-100 group-hover:bg-emerald-200 transition-colors">
+                  <Shield className="h-6 w-6 text-emerald-900" />
+                </div>
+              </div>
+              <h3 className="mb-2 text-lg font-semibold text-foreground tracking-tight">Vendor Integrity Shield</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                Cross-references terminating vendor lists and bank-grade negative databases to prevent fraud.
+              </p>
             </div>
-            <p className="text-xs text-slate-600 leading-relaxed">
-              Vendor Integrity Shield. Cross-references terminating vendor lists and bank-grade blacklists.
-            </p>
-          </div>
 
-          {/* Price Benchmarking */}
-          <div className="rounded-lg border border-gray-200 bg-gradient-to-br from-slate-50 to-white p-6 hover:shadow-sm transition-shadow">
-            <div className="flex items-center gap-3 mb-3">
-              <TrendingUp className="h-5 w-5 text-emerald-900 flex-shrink-0" />
-              <h3 className="font-semibold text-slate-900 text-sm">Price Benchmarking</h3>
+            {/* Price Benchmarking */}
+            <div
+              onMouseEnter={() => setActiveCard("pricing")}
+              onMouseLeave={() => setActiveCard(null)}
+              className="group glass rounded-xl p-8 transition-all duration-300 hover:shadow-lg hover:shadow-emerald-500/10 cursor-pointer"
+            >
+              <div className="flex items-center gap-4 mb-4">
+                <div className="p-3 rounded-lg bg-emerald-100 group-hover:bg-emerald-200 transition-colors">
+                  <TrendingUp className="h-6 w-6 text-emerald-900" />
+                </div>
+              </div>
+              <h3 className="mb-2 text-lg font-semibold text-foreground tracking-tight">LTV Safeguard</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                Real-time price benchmarking against regional MSRP data to ensure valuation accuracy.
+              </p>
             </div>
-            <p className="text-xs text-slate-600 leading-relaxed">
-              LTV Safeguard. Real-time MSRP verification against regional disbursement data.
-            </p>
           </div>
         </div>
       </section>
