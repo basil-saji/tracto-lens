@@ -124,3 +124,21 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Smooth transition animation for view switching */
+@layer utilities {
+  .animate-slide-fade {
+    animation: slide-fade 0.3s ease-in-out;
+  }
+
+  @keyframes slide-fade {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}

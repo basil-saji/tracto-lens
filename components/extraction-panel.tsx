@@ -1,5 +1,4 @@
 "use client"
-
 import { ChevronLeft, CheckCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { extractionData } from "@/lib/mock-data"
@@ -10,9 +9,10 @@ import { CustomerProfile } from "@/components/sections/customer-profile"
 
 interface ExtractionPanelProps {
   onBack: () => void
+  onFieldHover?: (field: string | null) => void
 }
 
-export function ExtractionPanel({ onBack }: ExtractionPanelProps) {
+export function ExtractionPanel({ onBack, onFieldHover }: ExtractionPanelProps) {
   const isApproved = extractionData.risk_level === "LOW"
 
   return (
@@ -23,7 +23,31 @@ export function ExtractionPanel({ onBack }: ExtractionPanelProps) {
           <ChevronLeft className="mr-2 h-4 w-4" />
           Back
         </Button>
-        <h2 className="text-xl font-semibold tracking-tight text-slate-900">Extraction Results</h2>
+
+        <div className="mb-4 rounded-lg bg-slate-50 border border-slate-200 p-4">
+          <p className="text-xs font-medium text-slate-500 uppercase mb-3">Quick Summary</p>
+          <div className="grid grid-cols-3 gap-4">
+            <div>
+              <p className="text-xs text-slate-500">Tractor Model</p>
+              <p className="text-sm font-semibold text-slate-900 truncate">
+                {extractionData.description.split("(")[0].trim()}
+              </p>
+            </div>
+            <div>
+              <p className="text-xs text-slate-500">Total Amount</p>
+              <p className="text-sm font-semibold text-slate-900">₹{extractionData.total_amount}</p>
+            </div>
+            <div>
+              <p className="text-xs text-slate-500">Risk Level</p>
+              <div className="flex items-center gap-2 mt-0.5">
+                <span
+                  className={`inline-block h-2 w-2 rounded-full ${extractionData.risk_level === "LOW" ? "bg-emerald-600" : "bg-red-600"}`}
+                />
+                <p className="text-sm font-semibold text-slate-900">{extractionData.risk_level}</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Verdict Banner */}
@@ -37,12 +61,19 @@ export function ExtractionPanel({ onBack }: ExtractionPanelProps) {
         </div>
       )}
 
-      {/* Data Sections */}
       <div className="space-y-4 px-6 pb-8">
-        <DealerValidation data={extractionData} />
-        <AssetDetails data={extractionData} />
-        <Financials data={extractionData} />
-        <CustomerProfile data={extractionData} />
+        <div onMouseEnter={() => onFieldHover?.("total")} onMouseLeave={() => onFieldHover?.(null)}>
+          <DealerValidation data={extractionData} />
+        </div>
+        <div onMouseEnter={() => onFieldHover?.("asset")} onMouseLeave={() => onFieldHover?.(null)}>
+          <AssetDetails data={extractionData} />
+        </div>
+        <div onMouseEnter={() => onFieldHover?.("financials")} onMouseLeave={() => onFieldHover?.(null)}>
+          <Financials data={extractionData} />
+        </div>
+        <div onMouseEnter={() => onFieldHover?.("customer")} onMouseLeave={() => onFieldHover?.(null)}>
+          <CustomerProfile data={extractionData} />
+        </div>
       </div>
 
       {/* Action Footer */}

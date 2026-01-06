@@ -4,14 +4,18 @@ import { useState } from "react"
 import { ZoomIn, ZoomOut, RotateCw } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
-export function DocumentViewer() {
+interface DocumentViewerProps {
+  highlightedField?: string | null
+}
+
+export function DocumentViewer({ highlightedField }: DocumentViewerProps) {
   const [zoom, setZoom] = useState(100)
 
   return (
     <div className="flex w-1/2 flex-col items-center justify-center bg-slate-100 p-8">
-      {/* Document Placeholder */}
+      {/* Document Placeholder with highlight on hover */}
       <div
-        className="flex items-center justify-center rounded-lg bg-white shadow-lg"
+        className="flex items-center justify-center rounded-lg bg-white shadow-lg relative"
         style={{
           width: `${Math.min(400, 400 * (zoom / 100))}px`,
           height: `${Math.min(550, 550 * (zoom / 100))}px`,
@@ -24,10 +28,13 @@ export function DocumentViewer() {
           <p className="mt-4 text-sm text-slate-400">Tractor Loan Invoice</p>
           <p className="mt-2 text-xs text-slate-300">SBFC/2025-26/0452</p>
         </div>
+
+        {highlightedField && (
+          <div className="absolute inset-4 border-2 border-yellow-400 rounded bg-yellow-50/20 pointer-events-none animate-pulse" />
+        )}
       </div>
 
-      {/* Floating Toolbar */}
-      <div className="mt-8 flex gap-3 rounded-full bg-white px-4 py-3 shadow-lg">
+      <div className="mt-8 flex gap-3 rounded-full bg-white/80 backdrop-blur-md px-4 py-3 shadow-lg border border-white/20">
         <Button
           variant="ghost"
           size="sm"

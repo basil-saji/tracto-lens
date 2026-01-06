@@ -1,4 +1,4 @@
-import { Scan, Shield, Database } from "lucide-react"
+import { Scan, Shield, TrendingUp } from "lucide-react"
 import { UploadZone } from "@/components/upload-zone"
 
 interface LandingViewProps {
@@ -22,19 +22,38 @@ export function LandingView({ onAnalyze }: LandingViewProps) {
           <UploadZone onAnalyze={onAnalyze} />
         </div>
 
-        {/* Trust Signals Grid */}
-        <div className="grid w-full max-w-2xl grid-cols-3 gap-8">
-          <div className="flex flex-col items-center gap-3">
-            <Scan className="h-6 w-6 text-emerald-900" />
-            <h3 className="font-semibold text-slate-900">Handwriting Recognition</h3>
+        <div className="grid w-full max-w-4xl grid-cols-1 gap-6 md:grid-cols-3">
+          {/* Handwriting Recognition */}
+          <div className="rounded-lg border border-gray-200 bg-gradient-to-br from-slate-50 to-white p-6 hover:shadow-sm transition-shadow">
+            <div className="flex items-center gap-3 mb-3">
+              <Scan className="h-5 w-5 text-emerald-900 flex-shrink-0" />
+              <h3 className="font-semibold text-slate-900 text-sm">Handwriting Recognition</h3>
+            </div>
+            <p className="text-xs text-slate-600 leading-relaxed">
+              Intelligent Script Analysis. Converts messy dealer handwriting into structured data.
+            </p>
           </div>
-          <div className="flex flex-col items-center gap-3">
-            <Shield className="h-6 w-6 text-emerald-900" />
-            <h3 className="font-semibold text-slate-900">GSTIN & Fraud Check</h3>
+
+          {/* Fraud Check */}
+          <div className="rounded-lg border border-gray-200 bg-gradient-to-br from-slate-50 to-white p-6 hover:shadow-sm transition-shadow">
+            <div className="flex items-center gap-3 mb-3">
+              <Shield className="h-5 w-5 text-emerald-900 flex-shrink-0" />
+              <h3 className="font-semibold text-slate-900 text-sm">Fraud Check</h3>
+            </div>
+            <p className="text-xs text-slate-600 leading-relaxed">
+              Vendor Integrity Shield. Cross-references terminating vendor lists and bank-grade blacklists.
+            </p>
           </div>
-          <div className="flex flex-col items-center gap-3">
-            <Database className="h-6 w-6 text-emerald-900" />
-            <h3 className="font-semibold text-slate-900">Price Benchmarking</h3>
+
+          {/* Price Benchmarking */}
+          <div className="rounded-lg border border-gray-200 bg-gradient-to-br from-slate-50 to-white p-6 hover:shadow-sm transition-shadow">
+            <div className="flex items-center gap-3 mb-3">
+              <TrendingUp className="h-5 w-5 text-emerald-900 flex-shrink-0" />
+              <h3 className="font-semibold text-slate-900 text-sm">Price Benchmarking</h3>
+            </div>
+            <p className="text-xs text-slate-600 leading-relaxed">
+              LTV Safeguard. Real-time MSRP verification against regional disbursement data.
+            </p>
           </div>
         </div>
       </section>
